@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_message.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamou <ahamou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 08:47:53 by ahamou            #+#    #+#             */
-/*   Updated: 2023/01/31 02:11:36 by ahamou           ###   ########.fr       */
+/*   Created: 2023/01/31 02:48:49 by ahamou            #+#    #+#             */
+/*   Updated: 2023/01/31 02:55:22 by ahamou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "pipex.h"
 
-void	error_message(char *str)
+size_t	ft_strlen(char *s)
 {
-	write (STDERR_FILENO, str, ft_strlen(str));
-	write (STDERR_FILENO, "\n", 1);
-	exit(1);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

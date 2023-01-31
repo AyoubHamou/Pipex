@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_message.c                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamou <ahamou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 08:47:53 by ahamou            #+#    #+#             */
-/*   Updated: 2023/01/31 02:11:36 by ahamou           ###   ########.fr       */
+/*   Created: 2023/01/31 02:50:24 by ahamou            #+#    #+#             */
+/*   Updated: 2023/01/31 02:54:45 by ahamou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "pipex.h"
 
-void	error_message(char *str)
+void	*ft_memset(void	*b, int c, size_t len)
 {
-	write (STDERR_FILENO, str, ft_strlen(str));
-	write (STDERR_FILENO, "\n", 1);
-	exit(1);
+	unsigned char	*s;
+	size_t			i;
+
+	s = (unsigned char *)b;
+	i = 0;
+	while (i < len)
+	{
+		s[i] = (unsigned char)c;
+		i++;
+	}
+	return (b);
 }

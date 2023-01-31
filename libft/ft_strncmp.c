@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_message.c                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamou <ahamou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 08:47:53 by ahamou            #+#    #+#             */
-/*   Updated: 2023/01/31 02:11:36 by ahamou           ###   ########.fr       */
+/*   Created: 2023/01/31 02:49:04 by ahamou            #+#    #+#             */
+/*   Updated: 2023/01/31 02:55:26 by ahamou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "pipex.h"
 
-void	error_message(char *str)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	write (STDERR_FILENO, str, ft_strlen(str));
-	write (STDERR_FILENO, "\n", 1);
-	exit(1);
+	size_t	i;
+
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
 }

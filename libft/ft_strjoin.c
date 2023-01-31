@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_message.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamou <ahamou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 08:47:53 by ahamou            #+#    #+#             */
-/*   Updated: 2023/01/31 02:11:36 by ahamou           ###   ########.fr       */
+/*   Created: 2023/01/31 02:51:05 by ahamou            #+#    #+#             */
+/*   Updated: 2023/01/31 02:52:33 by ahamou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "pipex.h"
 
-void	error_message(char *str)
+char	*ft_strjoin(char *s1, char c, char *s2)
 {
-	write (STDERR_FILENO, str, ft_strlen(str));
-	write (STDERR_FILENO, "\n", 1);
-	exit(1);
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	str = malloc(sizeof(char) * (strlen(s1) + strlen(s2) + 2));
+	i = 0;
+	j = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	str[j++] = c;
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	return (str);
 }

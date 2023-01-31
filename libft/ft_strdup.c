@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_message.c                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamou <ahamou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 08:47:53 by ahamou            #+#    #+#             */
-/*   Updated: 2023/01/31 02:11:36 by ahamou           ###   ########.fr       */
+/*   Created: 2023/01/31 02:49:31 by ahamou            #+#    #+#             */
+/*   Updated: 2023/01/31 02:52:35 by ahamou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "pipex.h"
 
-void	error_message(char *str)
+char	*ft_strdup(char	*s)
 {
-	write (STDERR_FILENO, str, ft_strlen(str));
-	write (STDERR_FILENO, "\n", 1);
-	exit(1);
+	char	*dup;
+	size_t	strlen;
+	size_t	i;
+
+	strlen = ft_strlen(s);
+	i = 0;
+	dup = malloc(sizeof(char) * strlen + 1);
+	if (!dup)
+		return (0);
+	while (s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

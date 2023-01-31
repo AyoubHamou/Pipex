@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child1.c                                           :+:      :+:    :+:   */
+/*   child2_here_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamou <ahamou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 01:54:40 by ahamou            #+#    #+#             */
-/*   Updated: 2023/01/30 02:45:13 by ahamou           ###   ########.fr       */
+/*   Created: 2023/01/29 22:57:43 by ahamou            #+#    #+#             */
+/*   Updated: 2023/01/31 02:09:07 by ahamou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../Includes/pipex_bonus.h"
 
-void	child1(int *fd, char **av, char **env)
+void	child2_here(int *fd1, int *fd2, char **av, char **env)
 {
-	char	**arg1;
-	char	*path1;
-	int		infile;
+	char	**arg2;
+	char	*path2;
+	int		outfile;
 
-	infile = open(av[1], O_RDONLY);
-	arg1 = ft_split(av[2], ' ');
-	path1 = get_path(arg1[0], env);
-	if (access(av[2], R_OK) == -1)
-	{
-		if (infile == -1)
-			error_message("Can't open the file");
-		exit (0);
-	}
-	close(fd[0]);
-	if (dup2(infile, 0) == -1)
+	arg2 = ft_split(av[4], ' ');
+	path2 = get_path(arg2[0], env);
+	outfile = open(av[5], O_RDWR | O_CREAT | O_APPEND, 0644);
+	if (outfile == -1)
+		error_message("Can't open the file");
+	close(fd1[1]);
+	close(fd2[1]);
+	if (dup2(fd2[0], 0) == -1)
 		error_message("Error while duplicating");
-	close(infile);
-	if (dup2(fd[1], 1) == -1)
+	close(fd1[0]);
+	close(fd2[0]);
+	if (dup2(outfile, 1) == -1)
 		error_message("Error while duplicating");
-	close(fd[1]);
-	execve(path1, arg1, env);
+	close(outfile);
+	execve(path2, arg2, env);
 	exit(1);
 }

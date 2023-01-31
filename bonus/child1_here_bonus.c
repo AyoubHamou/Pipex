@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child1.c                                           :+:      :+:    :+:   */
+/*   child1_here_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamou <ahamou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 01:54:40 by ahamou            #+#    #+#             */
-/*   Updated: 2023/01/30 02:45:13 by ahamou           ###   ########.fr       */
+/*   Created: 2023/01/29 22:56:23 by ahamou            #+#    #+#             */
+/*   Updated: 2023/01/31 02:08:56 by ahamou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/pipex.h"
+#include "../Includes/pipex_bonus.h"
 
-void	child1(int *fd, char **av, char **env)
+void	child1_here(int *fd1, int *fd2, char **av, char **env)
 {
 	char	**arg1;
 	char	*path1;
-	int		infile;
 
-	infile = open(av[1], O_RDONLY);
-	arg1 = ft_split(av[2], ' ');
+	arg1 = ft_split(av[3], ' ');
 	path1 = get_path(arg1[0], env);
-	if (access(av[2], R_OK) == -1)
-	{
-		if (infile == -1)
-			error_message("Can't open the file");
-		exit (0);
-	}
-	close(fd[0]);
-	if (dup2(infile, 0) == -1)
+	close(fd1[1]);
+	if (dup2(fd1[0], 0) == -1)
 		error_message("Error while duplicating");
-	close(infile);
-	if (dup2(fd[1], 1) == -1)
+	close(fd1[0]);
+	close(fd2[0]);
+	if (dup2(fd2[1], 1) == -1)
 		error_message("Error while duplicating");
-	close(fd[1]);
+	close(fd2[1]);
 	execve(path1, arg1, env);
 	exit(1);
 }
